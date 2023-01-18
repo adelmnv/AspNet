@@ -26,5 +26,10 @@ namespace AspNet.Controllers
 
             return View();
         }
+
+        public ActionResult Partial()
+        {
+            return PartialView();
+        }
     }
 }
