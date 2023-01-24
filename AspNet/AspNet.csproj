@@ -135,7 +135,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\MovieHelper.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountContext.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MovieContext.cs" />
     <Compile Include="Models\MoviesDbInitializer.cs" />
@@ -177,7 +179,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Async\Create.cshtml" />
     <Content Include="Views\Async\Delete.cshtml" />
     <Content Include="Views\Async\Details.cshtml" />
@@ -185,6 +186,9 @@
     <Content Include="Views\Async\Index.cshtml" />
     <Content Include="Views\Shared\__MyLayout.cshtml" />
     <Content Include="Views\Home\Partial.cshtml" />
+    <Content Include="Views\Register\SignUp.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

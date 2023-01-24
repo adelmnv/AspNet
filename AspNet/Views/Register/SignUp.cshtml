@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Sign Up";
+}
+
+<h2>Registration Form</h2>
+<form method="post" action="">
+
+    <table>
+        <input type="hidden" value="@ViewBag.Date" name="CreatedDate" />
+        <tr>
+            <td>
+                @Html.Label("Input your first name: ")
+            </td>
+            <td>
+                @Html.TextBox("FirstName")
+            </td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Input your last name: ")</td>
+            <td>@Html.TextBox("LastName")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Input your password: ")</td>
+            <td>@Html.Password("Password")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Input your email: ")</td>
+            <td> @Html.TextBox("Email")</td>   
+        </tr>
+        <tr>
+            <td>@Html.Label("Input your gender: ")</td>
+            <td>@Html.TextBox("Gender")</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Sign Up" /></td>
+        </tr>
+
+    </table>
+</form>

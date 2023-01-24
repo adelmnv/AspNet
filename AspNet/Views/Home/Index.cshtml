@@ -1,7 +1,11 @@
-﻿@{
+﻿
+@using AspNet.Helpers
+@{
     ViewBag.Title = "Home Page";
 }
 
-@Html.Partial("Partial", new string[] {"Simona Halep","Novak Jokovic","Ben Barns","Tom Holland","Zendaya","Selena Gomez"})
+@Html.Partial("Partial", new string[] { "Simona Halep", "Novak Jokovic", "Ben Barns", "Tom Holland", "Zendaya", "Selena Gomez" })
+<h2>Helper</h2>
+@MovieHelper.CreateList(Html, new string[] { "Top Gun: Moverick", "Turning Red", "The Batman", "The Woman King" })
 <h2>Index</h2>
 <p>Hello</p>

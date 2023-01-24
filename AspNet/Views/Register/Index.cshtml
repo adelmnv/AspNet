@@ -1,37 +1,7 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<h2>Registration Form</h2>
-<form method="post" action="">
-
-    <table>
-        <input type="hidden" value="@ViewBag.Date" name="CreatedDate" />
-        <tr>
-            <td><p>Input your first name:</p></td>
-            <td><input type="text" name="FirstName" /></td>
-        </tr>
-        <tr>
-            <td><p>Input your last name:</p></td>
-            <td><input type="text" name="LastName" /></td>
-        </tr>
-        <tr>
-            <td><p>Input your password:</p></td>
-            <td><input type="password" name="Password" /></td>
-        </tr>
-        <tr>
-            <td><p>Input your email:</p></td>
-            <td><input type="email" name="Email" /></td>
-        </tr>
-        <tr>
-            <td><p>Input your gender:</p></td>
-            <td><input type="text" name="Gender" /></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Sign Up" /></td>
-        </tr>
-
-    </table>
-</form>
+<h2>Welcome!</h2>
+<div><a href="/Register/SignUp">Sign Up</a> if you don't have an account</div>
+<div><a href="/Register/LogIn">Log in</a> if you already have an account</div>
