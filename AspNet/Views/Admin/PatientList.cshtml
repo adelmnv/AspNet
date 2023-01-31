@@ -1,4 +1,6 @@
-﻿@model IEnumerable<AspNet.Models.Patient>
+﻿@*@model IEnumerable<AspNet.Models.Patient>*@
+@model AspNet.Models.IndexViewModel
+@using AspNet.Helpers
 
 @{
     ViewBag.Title = "PatientList";
@@ -10,22 +12,26 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Account.FirstName)
+            @Html.DisplayName("First Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Account.LastName)
+            @Html.DisplayName("LastName")
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Account.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Account.LastName)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Patients)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.LastName)
+            </td>
+        </tr>
+    }
 
 </table>
+<div class="btn-group">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("PatientList", new { page = x }))
+</div>

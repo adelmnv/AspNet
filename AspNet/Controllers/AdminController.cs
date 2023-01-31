@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AspNet.Models;
+using System.Web.UI;
+using System.Drawing.Printing;
 
 namespace AspNet.Controllers
 {
@@ -16,16 +18,26 @@ namespace AspNet.Controllers
         private ADPContext db = new ADPContext();
 
         // GET: Admin
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1)
         {
-            var doctors = db.Doctors.Include(d => d.Account);
-            return View(await doctors.ToListAsync());
+            //var doctors = db.Doctors.Include(d => d.Account);
+            //return View(await doctors.ToListAsync());
+            int pageSize = 5;
+            IEnumerable<Doctor> doctors = db.Doctors.OrderBy(p => p.Id).Skip((page - 1) * pageSize).Take(pageSize).Include(d=> d.Account);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = db.Doctors.Count() };
+            IndexViewModel indexView = new IndexViewModel { PageInfo = pageInfo, Doctors = doctors };
+            return View(indexView);
         }
 
-        public async Task<ActionResult> PatientList()
+        public async Task<ActionResult> PatientList(int page = 1)
         {
-            var patients = db.Patients.Include(d => d.Account);
-            return View(await patients.ToListAsync());
+            //var patients = db.Patients.Include(d => d.Account);
+            //return View(await patients.ToListAsync());
+            int pageSize = 5;
+            IEnumerable<Patient> patients = db.Patients.OrderBy(p => p.Id).Skip((page - 1) * pageSize).Take(pageSize).Include(d => d.Account);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = db.Patients.Count() };
+            IndexViewModel indexView = new IndexViewModel { PageInfo = pageInfo, Patients = patients };
+            return View(indexView);
         }
 
         // GET: Admin/Create

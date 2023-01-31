@@ -1,4 +1,6 @@
-﻿@model IEnumerable<AspNet.Models.Doctor>
+﻿@*@model IEnumerable<AspNet.Models.Doctor>*@
+@model AspNet.Models.IndexViewModel
+@using AspNet.Helpers
 
 @{
     ViewBag.Title = "Index";
@@ -15,29 +17,35 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Account.FirstName)
+            @Html.DisplayName("First Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Account.LastName)
+            @Html.DisplayName("LastName")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Specialization)
+            @Html.DisplayName("Specialization")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Account.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Account.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Specialization)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Doctors)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specialization)
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+
+<div class="btn-group">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+</div>
