@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AspNet.Models.Doctor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Doctor List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @Html.ActionLink("Patient List", "PatientList")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Specialization)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Specialization)
+        </td>
+    </tr>
+}
+
+</table>

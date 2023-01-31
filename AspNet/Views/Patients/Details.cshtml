@@ -1,0 +1,43 @@
+﻿@model AspNet.Models.Patient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.LastName)
+        </dd>
+        <dt>
+            Doctors
+        </dt>
+        <dd>
+            <ul>
+                @foreach (AspNet.Models.Doctor c in ViewBag.Doctors)
+                {
+                    <li>@c.Account.FirstName @c.Account.LastName - @c.Specialization</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Exit", "Index")
+</p>

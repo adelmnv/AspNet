@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Log In</h2>
+
+<p>
+    @Html.ActionLink("Sign Up", "SignUp")
+</p>
+<form method="post" action="">
+
+    <table>
+        <tr>
+            <td> @Html.Label("Input your email:")</td>
+            <td> @Html.TextBox("Email")</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Input your password:")</td>
+            <td>@Html.Password("Password")</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Log in" /></td>
+        </tr>
+    </table>
+</form>

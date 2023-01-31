@@ -1,0 +1,31 @@
+﻿@model IEnumerable<AspNet.Models.Patient>
+
+@{
+    ViewBag.Title = "PatientList";
+}
+
+<h2>Patient List</h2>
+
+<p>@Html.ActionLink("Doctor List", "Index")</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.LastName)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.LastName)
+        </td>
+    </tr>
+}
+
+</table>

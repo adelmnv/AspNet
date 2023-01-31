@@ -1,0 +1,52 @@
+﻿@model AspNet.Models.Patient
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Patient</h4>
+    <hr />
+    <dt>
+        @Html.DisplayNameFor(model => model.Account.FirstName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Account.FirstName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Account.LastName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Account.LastName)
+    </dd>
+    <div class="form-group">
+        <p>Doctors</p>
+        <div class="col-md-10">
+            @foreach (AspNet.Models.Doctor c in ViewBag.Doctors)
+            {
+                string s = $"{@c.Account.FirstName} {@c.Account.LastName} - {@c.Specialization}";
+                <input type="checkbox" name="selectedDoctors" value="@c.Id"
+                       @(Model.Doctors.Contains(c) ? "checked=\"checked\"" : "") />@s<br />
+                }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

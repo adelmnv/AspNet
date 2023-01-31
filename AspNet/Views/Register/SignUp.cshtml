@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "Sign Up";
+﻿
+@{
+    ViewBag.Title = "SignUp";
 }
 
 <h2>Registration Form</h2>
 <form method="post" action="">
 
-    <table>
+    <table class="table">
         <input type="hidden" value="@ViewBag.Date" name="CreatedDate" />
         <tr>
             <td>
@@ -25,7 +26,7 @@
         </tr>
         <tr>
             <td>@Html.Label("Input your email: ")</td>
-            <td> @Html.TextBox("Email")</td>   
+            <td> @Html.TextBox("Email")</td>
         </tr>
         <tr>
             <td>@Html.Label("Input your gender: ")</td>
