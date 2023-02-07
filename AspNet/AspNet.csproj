@@ -215,7 +215,7 @@
     <Content Include="Views\Patients\Index.cshtml" />
     <Content Include="Views\Doctors\Details.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\EtoNeVhodDlyaAdmina.cshtml" />
     <Content Include="Views\Admin\PatientList.cshtml" />
     <Content Include="Views\Admin\DoctorList.cshtml" />
     <Content Include="Views\Admin\PatientFilter.cshtml" />

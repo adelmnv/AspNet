@@ -18,7 +18,14 @@ namespace AspNet.Controllers
         private ADPContext db = new ADPContext();
 
         // GET: Admin
-        public async Task<ActionResult> Index(string gender, string state, int page = 1)
+
+        public string Index()
+        {
+            return "How you managed to reach this URL?";
+        }
+
+        [ActionName("EtoNeVhodDlyaAdmina")]
+        public async Task<ActionResult> Index1(string gender, string state, int page = 1)
         {
             //var doctors = db.Doctors.Include(d => d.Account);
             //return View(await doctors.ToListAsync());

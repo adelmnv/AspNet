@@ -63,7 +63,7 @@ namespace AspNet.Controllers
             }
             else if(account.ID== 1 && account.Password == "admin1") 
             {
-                return RedirectToRoute(new { controller = "Admin", action = $"Index", });
+                return RedirectToRoute(new { controller = "Admin", action = "Index", });
             }
             return RedirectToAction("Index");
         }
