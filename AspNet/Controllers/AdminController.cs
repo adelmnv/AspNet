@@ -18,12 +18,86 @@ namespace AspNet.Controllers
         private ADPContext db = new ADPContext();
 
         // GET: Admin
-        public async Task<ActionResult> Index(int page = 1)
+        public async Task<ActionResult> Index(string gender, string state, int page = 1)
+        {
+            //var doctors = db.Doctors.Include(d => d.Account);
+            //return View(await doctors.ToListAsync());
+
+            int pageSize = 10;
+            ViewBag.Gender = gender;
+            ViewBag.State = state;
+            IQueryable<Patient> patients = db.Patients.Include(x => x.Account);
+            IQueryable<Doctor> doctors = db.Doctors.Include(x => x.Account);
+
+            if(!String.IsNullOrEmpty(state) && !state.Equals("All"))
+            {
+                if(state == "Doctor")
+                    patients = null;
+                else if(state == "Patient")
+                    doctors = null;
+            }
+            if(!String.IsNullOrEmpty(gender) && !gender.Equals("All"))
+            {
+                if(patients != null)
+                    patients = patients.Where(x => x.Account.Gender == gender);
+                if(doctors != null)
+                    doctors = doctors.Where(x => x.Account.Gender == gender);
+            }
+            int size = 0;
+            if (patients != null)
+                size += patients.Count();
+            if(doctors != null)
+                size += doctors.Count();
+          
+            if(patients != null)
+                patients = patients.OrderBy(p => p.Id).Skip((page - 1) * pageSize/2).Take(pageSize/2).Include(d => d.Account);
+            if(doctors != null)
+                doctors = doctors.OrderBy(p => p.Id).Skip((page - 1) * pageSize/2).Take(pageSize/2).Include(d => d.Account);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = size };
+
+            if(doctors != null && patients != null)
+            {
+                PatientDoctorListViewModel patientdoctorListViewModel = new PatientDoctorListViewModel
+                {
+                    Patients = patients.ToList(),
+                    Doctors = doctors.ToList(),
+                    Gender = new SelectList(new List<string>() { "All", "Woman", "Man" }),
+                    State = new SelectList(new List<string>() { "All", "Doctor", "Patient" }),
+                    PageInfo = pageInfo
+                };
+                return View(patientdoctorListViewModel);
+            }
+            else if (doctors == null)
+            {
+                PatientDoctorListViewModel patientdoctorListViewModel = new PatientDoctorListViewModel
+                {
+                    Patients = patients.ToList(),
+                    Gender = new SelectList(new List<string>() { "All", "Woman", "Man" }),
+                    State = new SelectList(new List<string>() { "All", "Doctor", "Patient" }),
+                    PageInfo = pageInfo
+                };
+                return View(patientdoctorListViewModel);
+            }
+            else
+            {
+                PatientDoctorListViewModel patientdoctorListViewModel = new PatientDoctorListViewModel
+                {
+                    Doctors = doctors.ToList(),
+                    Gender = new SelectList(new List<string>() { "All", "Woman", "Man" }),
+                    State = new SelectList(new List<string>() { "All", "Doctor", "Patient" }),
+                    PageInfo = pageInfo
+                };
+                return View(patientdoctorListViewModel);
+            }
+           
+        }
+
+        public async Task<ActionResult> DoctorList(int page = 1)
         {
             //var doctors = db.Doctors.Include(d => d.Account);
             //return View(await doctors.ToListAsync());
             int pageSize = 5;
-            IEnumerable<Doctor> doctors = db.Doctors.OrderBy(p => p.Id).Skip((page - 1) * pageSize).Take(pageSize).Include(d=> d.Account);
+            IEnumerable<Doctor> doctors = db.Doctors.OrderBy(p => p.Id).Skip((page - 1) * pageSize).Take(pageSize).Include(d => d.Account);
             PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = db.Doctors.Count() };
             IndexViewModel indexView = new IndexViewModel { PageInfo = pageInfo, Doctors = doctors };
             return View(indexView);
@@ -39,6 +113,70 @@ namespace AspNet.Controllers
             IndexViewModel indexView = new IndexViewModel { PageInfo = pageInfo, Patients = patients };
             return View(indexView);
         }
+
+        public async Task<ActionResult> PatientFilter(string gender, int page = 1)
+        {
+            int pageSize = 5;
+            ViewBag.Gender = gender;
+            IQueryable<Patient> patients = db.Patients.Include(x => x.Account);
+
+            if(gender != null)
+            {
+                if(gender != "All")
+                    patients = patients.Where(x => x.Account.Gender == gender);
+            }
+
+            int size = patients.Count();
+            patients = patients.OrderBy(p => p.Id).Skip((page - 1) * pageSize).Take(pageSize).Include(d => d.Account);
+            
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = size };
+            
+            PatientListViewModel patientListViewModel = new PatientListViewModel
+            {
+                Patients = patients.ToList(),
+                Gender = new SelectList(new List<string>() {"All", "Woman", "Man" }),
+                PageInfo= pageInfo
+            };
+
+            return View(patientListViewModel);
+        }
+
+        public async Task<ActionResult> DoctorFilter(string gender, string specialization, int page = 1)
+        {
+            int pageSize = 5;
+            ViewBag.Gender = gender;
+            ViewBag.Specialization = specialization;
+            List<string> specializations = db.Doctors.Select(x => x.Specialization).OrderBy(x=> x).ToList();
+            specializations.Insert(0, "All");
+
+            IQueryable<Doctor> doctors = db.Doctors.Include(x => x.Account);
+
+            if(gender != null)
+            {
+                if (gender != "All")
+                    doctors = doctors.Where(x => x.Account.Gender == gender);
+            }
+
+            if(!String.IsNullOrEmpty(specialization) && !specialization.Equals("All"))
+            {
+                doctors = doctors.Where(x=> x.Specialization== specialization);
+            }
+
+            int size = doctors.Count();
+
+            doctors = doctors.OrderBy(p => p.Id).Skip((page - 1) * pageSize).Take(pageSize).Include(d => d.Account);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = size };
+            DoctorListViewModel doctorListViewModel = new DoctorListViewModel
+            {
+                Doctors= doctors.ToList(),
+                Gender = new SelectList(new List<string>() { "All", "woman", "man" }),
+                Specialization = new SelectList(specializations),
+                PageInfo= pageInfo
+            };
+            return View(doctorListViewModel);
+        }
+
+
 
         // GET: Admin/Create
         public ActionResult Create()

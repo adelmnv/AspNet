@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace AspNet.Models
 {
@@ -22,5 +24,29 @@ namespace AspNet.Models
         public PageInfo PageInfo { get; set; }
         public IEnumerable<Doctor> Doctors { get; set; }
         public IEnumerable<Patient> Patients { get; set; }
+    }
+
+    public class PatientListViewModel
+    {
+        public IEnumerable<Patient> Patients { get; set; }
+        public SelectList Gender { get; set; }
+        public PageInfo PageInfo { get; set; }
+    }
+
+    public class DoctorListViewModel
+    {
+        public IEnumerable<Doctor> Doctors { get; set; }
+        public SelectList Gender { get; set; }
+        public SelectList Specialization { get; set; }
+        public PageInfo PageInfo { get; set; }
+    }
+
+    public class PatientDoctorListViewModel
+    {
+        public IEnumerable<Doctor> Doctors { get; set; }
+        public IEnumerable<Patient> Patients { get; set; }
+        public SelectList State { get; set; }
+        public SelectList Gender { get; set; }
+        public PageInfo PageInfo { get; set; }
     }
 }

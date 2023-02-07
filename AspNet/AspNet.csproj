@@ -217,6 +217,9 @@
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\PatientList.cshtml" />
+    <Content Include="Views\Admin\DoctorList.cshtml" />
+    <Content Include="Views\Admin\PatientFilter.cshtml" />
+    <Content Include="Views\Admin\DoctorFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

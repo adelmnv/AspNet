@@ -1,5 +1,5 @@
 ﻿@*@model IEnumerable<AspNet.Models.Doctor>*@
-@model AspNet.Models.IndexViewModel
+@model AspNet.Models.PatientDoctorListViewModel
 @using AspNet.Helpers
 
 @{
@@ -9,11 +9,20 @@
 <h2>Doctor List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")|@Html.ActionLink("Exit", "Index", "Accounts")
+    @Html.ActionLink("Doctor Filter", "DoctorFilter")|@Html.ActionLink("Patient Filter", "PatientFilter")
 </p>
 <p>
-    @Html.ActionLink("Patient List", "PatientList")
+    @Html.ActionLink("Exit", "Index", "Accounts")
 </p>
+<form method="get">
+    <div class="form-inline">
+        @Html.LabelFor(p => p.Gender, "Gender", new { @class = "control-label" })
+        @Html.DropDownList("Gender", Model.Gender as SelectList, htmlAttributes: new { @class = "form-control" })
+        @Html.LabelFor(p => p.State, "State", new { @class = "control-label" })
+        @Html.DropDownList("State", Model.State as SelectList, htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value="Filter" class="btn btn-primary" name="gender" />
+    </div>
+</form>
 <table class="table">
     <tr>
         <th>
@@ -23,29 +32,72 @@
             @Html.DisplayName("LastName")
         </th>
         <th>
-            @Html.DisplayName("Specialization")
+            @Html.DisplayName("Gender")
+        </th>
+        <th>
+            @Html.DisplayName("State")
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Doctors)
+    @if (Model.Doctors != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Account.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Account.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Specialization)
-            </td>
-        </tr>
+        foreach (var item in Model.Doctors)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specialization)
+                </td>
+            </tr>
+        }
     }
 
+    @if (Model.Patients != null)
+    {
+        foreach (var item in Model.Patients)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.Gender)
+                </td>
+                <td>
+                    @Html.DisplayName("Patient")
+                </td>
+            </tr>
+        }
+    }
 </table>
 <br />
 
+@{
+    string g = "All";
+    string s = "All";
+    if (ViewBag.Gender != null)
+    {
+        g = ViewBag.Gender;
+    }
+    if (ViewBag.State != null)
+    {
+        s = ViewBag.State;
+    }
+}
+
+
 <div class="btn-group">
-    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, gender =g, state = s }))
 </div>
