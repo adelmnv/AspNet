@@ -90,3 +90,4 @@ C:\Users\Адель\source\repos\AspNet\AspNet\bin\EntityFramework.xml
 C:\Users\Адель\source\repos\AspNet\AspNet\bin\EntityFramework.SqlServer.xml
 C:\Users\Адель\source\repos\AspNet\AspNet\obj\Debug\AspNet.Migrations.First.resources
 C:\Users\Адель\source\repos\AspNet\AspNet\obj\Debug\AspNet.csproj.GenerateResource.cache
+C:\Users\Адель\source\repos\AspNet\AspNet\obj\Debug\AspNet.Migrations.Second.resources
