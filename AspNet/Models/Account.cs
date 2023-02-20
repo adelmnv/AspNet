@@ -23,7 +23,7 @@ namespace AspNet.Models
         public string Password { get; set; }
 
         [Required(ErrorMessage = "This is required field")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Incorrec email")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Incorrect email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "This is required field")]

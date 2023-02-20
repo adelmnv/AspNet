@@ -9,12 +9,14 @@ using System.Web;
 using System.Web.Mvc;
 using AspNet.Models;
 using Microsoft.Ajax.Utilities;
+using AspNet.Filters;
 
 namespace AspNet.Controllers
 {
     public class PatientsController : Controller
     {
         private ADPContext db = new ADPContext();
+
         public async Task<ActionResult> Index()
         {
             return View();
