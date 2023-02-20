@@ -4,22 +4,26 @@
 
 <h2>Log In</h2>
 
-<p>
+<p class="col-xs-12 col-sm-6 col-md-10">
     @Html.ActionLink("Sign Up", "SignUp")
 </p>
 <form method="post" action="">
 
-    <table>
-        <tr>
-            <td> @Html.Label("Input your email:")</td>
-            <td> @Html.TextBox("Email")</td>
-        </tr>
-        <tr>
-            <td>@Html.Label("Input your password:")</td>
-            <td>@Html.Password("Password")</td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Log in" /></td>
-        </tr>
-    </table>
+    <div class="row">
+        <table>
+            <tr class="col-xs-12 col-sm-6 col-md-10">
+                <td> @Html.Label("Input your email:")</td>
+                <td> @Html.TextBox("Email")</td>
+            </tr>
+            <br />
+            <tr class="col-xs-12 col-sm-6 col-md-10">
+                <td>@Html.Label("Input your password:")</td>
+                <td>@Html.Password("Password")</td>
+            </tr>
+            <tr class="col-xs-12 col-sm-6 col-md-10">
+                <td><input type="submit" value="Log in" class="btn-success"/></td>
+            </tr>
+        </table>
+    </div>
+   
 </form>
