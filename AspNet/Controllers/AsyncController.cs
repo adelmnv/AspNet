@@ -13,12 +13,12 @@ namespace AspNet.Controllers
 {
     public class AsyncController : Controller
     {
-        private MovieContext db = new MovieContext();
+        private MyMovieContext db = new MyMovieContext();
 
         // GET: Async
         public async Task<ActionResult> Index()
         {
-            return View(await db.Movies.ToListAsync());
+            return View(await db.MyMovies.ToListAsync());
         }
 
         // GET: Async/Details/5
@@ -28,7 +28,7 @@ namespace AspNet.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = await db.Movies.FindAsync(id);
+            MyMovie movie = await db.MyMovies.FindAsync(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -47,11 +47,11 @@ namespace AspNet.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Author,Date,CreatedBy")] Movie movie)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Author,Date,CreatedBy")] MyMovie movie)
         {
             if (ModelState.IsValid)
             {
-                db.Movies.Add(movie);
+                db.MyMovies.Add(movie);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace AspNet.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = await db.Movies.FindAsync(id);
+            MyMovie movie = await db.MyMovies.FindAsync(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace AspNet.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Author,Date,CreatedBy")] Movie movie)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Author,Date,CreatedBy")] MyMovie movie)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace AspNet.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = await db.Movies.FindAsync(id);
+            MyMovie movie = await db.MyMovies.FindAsync(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace AspNet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Movie movie = await db.Movies.FindAsync(id);
-            db.Movies.Remove(movie);
+            MyMovie movie = await db.MyMovies.FindAsync(id);
+            db.MyMovies.Remove(movie);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

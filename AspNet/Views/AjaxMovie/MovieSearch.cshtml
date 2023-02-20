@@ -1,0 +1,15 @@
+﻿@model IEnumerable<AspNet.Models.MyMovie>
+
+<div id="searchresult">
+    <h3>Movies: </h3>
+    <ol>
+        @foreach (var i in Model)
+        {
+            <li style="font-weight:bold; font-size:large">@i.Name</li>
+            <ul>
+                <li>@i.Author</li>
+                <li>@i.CreatedBy</li>
+            </ul>
+        }
+    </ol>
+</div>

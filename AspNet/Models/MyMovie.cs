@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AspNet.Models
 {
-    public class Movie
+    public class MyMovie
     {
         public int Id { get; set; }
         public string Name { get; set; }
