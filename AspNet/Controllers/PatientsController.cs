@@ -17,9 +17,19 @@ namespace AspNet.Controllers
     {
         private ADPContext db = new ADPContext();
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient patient = await db.Patients.FindAsync(id);
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            patient.Account = await db.Accounts.FindAsync(patient.AccountId);
+            return View(patient);
         }
         // GET: Patients/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -36,7 +46,7 @@ namespace AspNet.Controllers
             patient.Account = await db.Accounts.FindAsync(patient.AccountId);
             patient.Doctors.ForEach(x=> x.Account = db.Accounts.Find(x.AccountId));
             ViewBag.Doctors = patient.Doctors;
-            return View(patient);
+            return PartialView(patient);
         }
 
         // GET: Patients/Edit/5
@@ -79,7 +89,7 @@ namespace AspNet.Controllers
             db.Entry(newpatient).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction($"Details/{patient.Id}");
+            return RedirectToAction($"Index/{patient.Id}");
         }
 
         protected override void Dispose(bool disposing)

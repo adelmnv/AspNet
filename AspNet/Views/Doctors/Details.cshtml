@@ -4,47 +4,48 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" aria-hidden="true">X</button>
+        <h2>Doctor Details</h2>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.FirstName)
+            </dt>
 
-<div>
-    <h4>Doctor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.FirstName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.FirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Account.LastName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Account.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.LastName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Account.LastName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Account.LastName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Specialization)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Specialization)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Specialization)
-        </dd>
-        <dt>
-            Patients
-        </dt>
-        <dd>
-            <ul>
-                @foreach (AspNet.Models.Patient c in ViewBag.Patients)
-                {
-                    <li>@c.Account.FirstName @c.Account.LastName</li>
-                }
-            </ul>
-        </dd>
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.Specialization)
+            </dd>
+            <dt>
+                Patients
+            </dt>
+            <dd>
+                <ul>
+                    @foreach (AspNet.Models.Patient c in ViewBag.Patients)
+                    {
+                        <li>@c.Account.FirstName @c.Account.LastName</li>
+                    }
+                </ul>
+            </dd>
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Exit", "Index", "Accounts")
-</p>
+
+

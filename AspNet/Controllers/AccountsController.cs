@@ -56,12 +56,12 @@ namespace AspNet.Controllers
             if(db.Patients.Where(x=> x.AccountId == account.ID).Any())
             {
                 int id = db.Patients.Where(x => x.AccountId == account.ID).First().Id;
-                return RedirectToRoute(new { controller = "Patients", action = $"Details/{id}" });
+                return RedirectToRoute(new { controller = "Patients", action = $"Index/{id}" });
             }
             else if(db.Doctors.Where(x => x.AccountId == account.ID).Any())
             {
                 int id = db.Doctors.Where(x => x.AccountId == account.ID).First().Id;
-                return RedirectToRoute(new { controller = "Doctors", action = $"Details/{id}", });
+                return RedirectToRoute(new { controller = "Doctors", action = $"Index/{id}", });
             }
             else if(account.ID== 1 && account.Password == "admin1") 
             {

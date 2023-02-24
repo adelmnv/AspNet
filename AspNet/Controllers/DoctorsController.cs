@@ -16,8 +16,20 @@ namespace AspNet.Controllers
     public class DoctorsController : Controller
     {
         private ADPContext db = new ADPContext();
-
-        // GET: Doctors/Details/5
+        public async Task<ActionResult> Index(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Doctor doctor = await db.Doctors.FindAsync(id);
+            if (doctor == null)
+            {
+                return HttpNotFound();
+            }
+            doctor.Account = await db.Accounts.FindAsync(doctor.AccountId);
+            return View(doctor);
+        }
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,7 +44,7 @@ namespace AspNet.Controllers
             doctor.Account = await db.Accounts.FindAsync(doctor.AccountId);
             doctor.Patients.ForEach(x => x.Account = db.Accounts.Find(x.AccountId));
             ViewBag.Patients = doctor.Patients;
-            return View(doctor);
+            return PartialView(doctor);
         }
 
         protected override void Dispose(bool disposing)

@@ -1,4 +1,4 @@
-﻿@model AspNet.Models.Patient
+﻿@model AspNet.Models.Doctor
 @{
     ViewBag.Title = "Index";
 }
@@ -13,7 +13,7 @@
     <div id="dialogContent" class="modal-dialog"></div>
 </div>
 
-<p>Hello, @Html.ActionLink(fn, "Details", new { id = Model.Id }, new { @class = "patientItem" })</p>
+<p>Hello, Dr. @Html.ActionLink(fn, "Details", new { id = Model.Id }, new { @class = "doctorItem" })</p>
 
 <p>If you want to EXIT click @Html.ActionLink("Here", "Index", "Accounts")</p>
 
@@ -23,7 +23,7 @@
     <script type="text/javascript">
         $(function () {
             $.ajaxSetup({ cashe: false });
-            $(".patientItem").click(function (e) {
+            $(".doctorItem").click(function (e) {
                 e.preventDefault();
                 $.get(this.href, function (data) {
                     $('#dialogContent').html(data);

@@ -189,7 +189,7 @@ namespace AspNet.Controllers
         public ActionResult Create()
         {
             ViewBag.Date = DateTime.Now;
-            return View();
+            return PartialView();
         }
 
         // POST: Admin/Create
@@ -197,6 +197,7 @@ namespace AspNet.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[ActionName("Index")]
         public async Task<ActionResult> Create([Bind(Include = "ID,FirstName,LastName,Password,Email,Gender,CreatedDate")] Account account, string Specialization)
         {
             if (ModelState.IsValid)

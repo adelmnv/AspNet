@@ -5,17 +5,20 @@
 }
 
 <h2>Doctor Filter</h2>
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
 <p>
-    @Html.ActionLink("Create New", "Create")|@Html.ActionLink("Exit", "Index", "Accounts")
+    @Html.ActionLink("Create New Doctor", "Create",new { }, new {@class = "doctorItem"})
 </p>
 <p>
-    @Html.ActionLink("Patient Filter", "PatientFilter")
+    @Html.ActionLink("Patient Filter", "PatientFilter")|@Html.ActionLink("Exit", "Index", "Accounts")
 </p>
 <form method="get">
     <div class="form-inline">
         @Html.LabelFor(p => p.Gender, "Gender", new { @class = "control-label" })
         @Html.DropDownList("Gender", Model.Gender as SelectList, htmlAttributes: new { @class = "form-control" })
-        
+
         @Html.LabelFor(p => p.Specialization, "Specialization", new { @class = "control-label" })
         @Html.DropDownList("Specialization", Model.Specialization as SelectList, htmlAttributes: new { @class = "form-control" })
         <input type="submit" value="Filter" class="btn btn-primary" />
@@ -59,14 +62,14 @@
 </table>
 <br />
 
-@{ 
+@{
     string g = "All";
     string s = "All";
-    if(ViewBag.Gender != null)
+    if (ViewBag.Gender != null)
     {
         g = ViewBag.Gender;
     }
-    if(ViewBag.Specialization != null)
+    if (ViewBag.Specialization != null)
     {
         s = ViewBag.Specialization;
     }
@@ -75,3 +78,18 @@
 <div class="btn-group">
     @Html.PageLinks(Model.PageInfo, x => Url.Action("DoctorFilter", new { page = x, gender = g, specialization = s }))
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({ cashe: false });
+            $(".doctorItem").click(function (e) {
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+}

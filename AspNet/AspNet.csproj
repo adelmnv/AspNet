@@ -222,7 +222,6 @@
     <Content Include="Views\Accounts\LogIn.cshtml" />
     <Content Include="Views\Accounts\SignUp.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
-    <Content Include="Views\Patients\Create.cshtml" />
     <Content Include="Views\Patients\Details.cshtml" />
     <Content Include="Views\Patients\Edit.cshtml" />
     <Content Include="Views\Patients\Index.cshtml" />
@@ -236,6 +235,7 @@
     <Content Include="Views\AjaxMovie\Index.cshtml" />
     <Content Include="Views\AjaxMovie\MovieSearch.cshtml" />
     <Content Include="Views\AjaxMovie\FavoriteMovie.cshtml" />
+    <Content Include="Views\Doctors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

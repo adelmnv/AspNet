@@ -5,9 +5,11 @@
 }
 
 <h2>Doctor List</h2>
-
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
 <p>
-    @Html.ActionLink("Create New", "Create")|@Html.ActionLink("Exit", "Index", "Accounts")
+    @Html.ActionLink("Create New", "Create", new {} ,new { @class = "doctorItem" })|@Html.ActionLink("Exit", "Index", "Accounts")
 </p>
 <p>
     @Html.ActionLink("Patient List", "PatientList")
@@ -48,3 +50,17 @@
     @Html.PageLinks(Model.PageInfo, x => Url.Action("DoctorList", new { page = x }))
 </div>
 
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({ cashe: false });
+            $(".doctorItem").click(function (e) {
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+}
